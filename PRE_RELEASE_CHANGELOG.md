@@ -6,7 +6,7 @@
 
 ## Bug Fixes
 
-- **Response duration:** Timed `response.duration` with `performance.now()` when it is available instead of `Date.now()`, so Next.js prerendering with Cache Components no longer fails on the timing call, and rounded the value to whole milliseconds. Falls back to `Date.now()` where `performance.now()` is missing. (**#PR**, closes **#11407**)
+- **Response duration:** Timed `response.duration` with `performance.now()` when it is available instead of `Date.now()`, so Next.js prerendering with Cache Components no longer fails on the timing call, and rounded the value to whole milliseconds. Falls back to `Date.now()` where `performance.now()` is missing. (**#11408**, closes **#11407**)
 
 ## Documentation
 
