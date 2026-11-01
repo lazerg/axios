@@ -240,7 +240,7 @@ describe('core::dispatchRequest response timing', () => {
 
   beforeEach(() => {
     now = 1000;
-    vi.spyOn(Date, 'now').mockImplementation(() => now);
+    vi.spyOn(performance, 'now').mockImplementation(() => now);
   });
 
   afterEach(() => {
@@ -398,6 +398,32 @@ describe('core::dispatchRequest response timing', () => {
       adapter: async (config) => {
         now += 25;
         return { ...createResponse(config), duration: 999 };
+      },
+    });
+
+    assert.strictEqual(response.duration, 25);
+  });
+
+  it('does not read Date.now() when timing a response', async () => {
+    vi.spyOn(Date, 'now').mockImplementation(() => {
+      throw new Error('Date.now() is not allowed');
+    });
+
+    const response = await axios.get('/timing', {
+      adapter: async (config) => {
+        now += 25;
+        return createResponse(config);
+      },
+    });
+
+    assert.strictEqual(response.duration, 25);
+  });
+
+  it('rounds sub-millisecond durations', async () => {
+    const response = await axios.get('/timing', {
+      adapter: async (config) => {
+        now += 25.4;
+        return createResponse(config);
       },
     });
 

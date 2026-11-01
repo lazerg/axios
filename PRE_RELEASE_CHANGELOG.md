@@ -6,6 +6,8 @@
 
 ## Bug Fixes
 
+- **Response duration:** Timed `response.duration` with `performance.now()` when it is available instead of `Date.now()`, so Next.js prerendering with Cache Components no longer fails on the timing call, and rounded the value to whole milliseconds. Falls back to `Date.now()` where `performance.now()` is missing. (**#PR**, closes **#11407**)
+
 ## Documentation
 
 - **README sponsor name:** Corrected sponsor name typo `BSAP SE` → `SAP SE` in the README sponsor listing. This updates sponsor recognition only, with no runtime, public API, or type compatibility changes. ([#11373](https://github.com/axios/axios/pull/11373))
