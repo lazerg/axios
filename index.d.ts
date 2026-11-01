@@ -527,7 +527,7 @@ export interface AxiosResponse<T = any, D = any, H = {}, P = any> {
   status: number;
   statusText: string;
   /**
-   * Wall-clock milliseconds from adapter invocation to settlement, clamped at zero.
+   * Milliseconds from adapter invocation to settlement, rounded and clamped at zero.
    * Excludes interceptors and request/response transforms. Stream consumption is not included.
    */
   duration?: number;

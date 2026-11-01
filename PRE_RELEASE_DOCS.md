@@ -28,6 +28,14 @@ Do not store raw diffs or line-number-only instructions here; prefer stable sect
 - **Docs targets:** `README.md` Response schema and Handling errors sections.
 - **Required content:** Add `duration` to the response schema and a short note on reading `error.response.duration` after checking `axios.isAxiosError(error)` and `error.response`. Use the docs-site wording in `docs/pages/advanced/response-schema.md` (Response duration) and `docs/pages/advanced/error-handling.md` (Response duration on errors): timing covers adapter execution only, streamed responses stop when the stream is available, the value is approximate wall-clock time, and errors without a response have no duration.
 
+### Response duration clock
+
+- **Change:** `response.duration` is timed with `performance.now()` when available instead of `Date.now()`, and rounded to whole milliseconds.
+- **Source:** PR #11408, issue #11407.
+- **Status:** Pending.
+- **Docs targets:** `docs/pages/advanced/response-schema.md` (Response duration) and the Spanish, French, and Chinese translations; the pending `README.md` Response duration entry above.
+- **Required content:** Replace "approximate wall-clock time measured with `Date.now()`" with: the value is measured with `performance.now()` where available and rounded to whole milliseconds, so it is not affected by system clock changes; runtimes without `performance.now()` fall back to `Date.now()`, where backward clock adjustments are clamped to `0` and forward adjustments can inflate the value.
+
 ### Asynchronous XSRF cookie reads in the XHR adapter (README)
 
 - **Change:** Bring `README.md` in line with the released docs site.
