@@ -33,7 +33,7 @@ Do not store raw diffs or line-number-only instructions here; prefer stable sect
 - **Change:** `response.duration` is timed with `performance.now()` when available instead of `Date.now()`, and rounded to whole milliseconds.
 - **Source:** PR #11408, issue #11407.
 - **Status:** Pending.
-- **Docs targets:** `docs/pages/advanced/response-schema.md` (Response duration) and the Spanish, French, and Chinese translations; the pending `README.md` Response duration entry above.
+- **Docs targets:** `docs/pages/advanced/response-schema.md` (Response duration) and the Spanish, French, and Chinese translations; the pending `README.md` Response duration entry above, which should use this wording instead of "approximate wall-clock time".
 - **Required content:** Replace "approximate wall-clock time measured with `Date.now()`" with: the value is measured with `performance.now()` where available and rounded to whole milliseconds, so it is not affected by system clock changes; runtimes without `performance.now()` fall back to `Date.now()`, where backward clock adjustments are clamped to `0` and forward adjustments can inflate the value.
 
 ### Asynchronous XSRF cookie reads in the XHR adapter (README)

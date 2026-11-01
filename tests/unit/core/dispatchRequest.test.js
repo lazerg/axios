@@ -428,5 +428,14 @@ describe('core::dispatchRequest response timing', () => {
     });
 
     assert.strictEqual(response.duration, 25);
+
+    const roundedUp = await axios.get('/timing', {
+      adapter: async (config) => {
+        now += 25.6;
+        return createResponse(config);
+      },
+    });
+
+    assert.strictEqual(roundedUp.duration, 26);
   });
 });
